@@ -6,6 +6,7 @@ The Wi-Fi signal will always go weak in some corners of your house, which is ver
 We plan to simulate the Wi-Fi signal strength in the house using the computational physics method. 
 The behaviour of a Wi-Fi signal, also known as an electromagnetic wave, is defined by the 
 Helmholtz equation:
+
 ![alt text](equation.png)
 
 So, if we can solve the Helmholtz equation with boundary condition (the structure of the house), 
@@ -13,4 +14,5 @@ the result will be the Wi-Fi signal strength in the whole house.
 The software should be able to use a 2-dimension floor plan as input, along with the point where 
 the Wi-Fi router is placed and the frequency of the signal. An example of floor plan input is as 
 below:
+
 ![alt text](floor-plan.png)
