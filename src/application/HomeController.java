@@ -21,18 +21,24 @@ public class HomeController implements Initializable {
 
 	@FXML Label imagePathLabel;
 	@FXML Button imageUploadButton;
-	@FXML ChoiceBox<String> frequencySelector;
+	@FXML ChoiceBox<Double> frequencySelector;
 	@FXML ChoiceBox<String> materialSelector;
+	String imgPath;
+	Double frequency;
+	String material;
+	@FXML Button submitButton;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		frequencySelector.getItems().removeAll(frequencySelector.getItems());
-		frequencySelector.getItems().addAll("2.4Ghz", "5Ghz");
-		frequencySelector.getSelectionModel().select("2.4Ghz");
+		frequencySelector.getItems().addAll(2.4, 5.0);
+		frequencySelector.getSelectionModel().select(2.4);
 		
 		materialSelector.getItems().removeAll(materialSelector.getItems());
 		materialSelector.getItems().addAll("Concrete", "Wood");
 		materialSelector.getSelectionModel().select("Concrete");
+		
+		
 		
 //		FileChooser imageChooser = new FileChooser();
 //		imageUploadButton.setOnAction(
@@ -48,34 +54,34 @@ public class HomeController implements Initializable {
 	}
 	
 	public void uploadFile(ActionEvent event) {
-		System.out.println("Hite Upload File");
 		try {
 			FileChooser chooser = new FileChooser();
 			chooser.setTitle("Choose Image");
+			chooser.getExtensionFilters().addAll(
+					new FileChooser.ExtensionFilter("PNG", "*.png"));
 			File file = chooser.showOpenDialog(new Stage());
 			
 			imagePathLabel.setText(file.getAbsolutePath());	
+			imgPath = file.getAbsolutePath();
+			
+			if(imgPath != "" || imgPath != null) {
+				submitButton.setDisable(false);
+			}
 		} catch (Exception e) {
 			System.out.println(e);
-			System.exit(0);
 		}
 	}
 	
-//	private void openFile(File file) {
-//		private Desktop desktop = Desktop.getDesktop();
-//        try {
-//            desktop.open(file);
-//        } catch (IOException ex) {
-//            Logger.getLogger(
-//                FileChooserSample.class.getName()).log(
-//                    Level.SEVERE, null, ex
-//                );
-//        }
-//    }
-
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//
-//	}
+	public void onSubmit(ActionEvent event) {
+		try {
+				frequency = frequencySelector.getValue();
+				material = materialSelector.getValue();
+				System.out.println(frequency + " " + material + imgPath);
+			
+			
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
 
 }
