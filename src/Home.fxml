@@ -16,7 +16,7 @@
       </Label>
       <Label layoutX="51.0" layoutY="123.0" prefHeight="18.0" prefWidth="42.0" text="File" />
       <Label fx:id="imagePathLabel" layoutX="97.0" layoutY="124.0" prefHeight="18.0" prefWidth="260.0" text="Label" />
-      <Button fx:id="imageUploadButton" layoutX="371.0" layoutY="120.0" mnemonicParsing="false" text="Choose Image">
+      <Button fx:id="imageUploadButton" layoutX="371.0" layoutY="120.0" mnemonicParsing="false" onAction="#uploadFile" text="Choose Image">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
