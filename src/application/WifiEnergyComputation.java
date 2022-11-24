@@ -67,7 +67,7 @@ public class WifiEnergyComputation {
 				int xp = x % dimx + 1;
 				int ym = (y + dimy - 2) % dimy + 1;
 				int yp = y % dimy + 1;
-
+				
 				xs.set(i, calculateLinearIndex(x, y));
 				ys.set(i, calculateLinearIndex(x, y));
 				vs.set(i, plan.get(x, y).subtract(2 * Math.pow(δ, -2)));
@@ -104,9 +104,7 @@ public class WifiEnergyComputation {
 		// Create sparse matrix
 		for (int x = 0; x < fsize; x++) {
 			s.set(xs.get(x).longValue(), ys.get(x).longValue(), vs.get(x));
-			System.out.println(xs.get(x)+" "+ys.get(x)+" "+vs.get(x));
 		}
-
 		// Create router position vector
 		for (int x = routerPosition.getKey(); x < routerPosition.getKey() + 4; x++) {
 			for (int y = routerPosition.getValue(); y < routerPosition.getValue() + 4; y++) {
@@ -116,13 +114,13 @@ public class WifiEnergyComputation {
 		System.out.println(f);
 		System.out.println("Done Major chunk");
 		
-		
-        ConjugateGradientSolver solver = new ConjugateGradientSolver();
+		ConjugateGradientSolver solver = new ConjugateGradientSolver();
 		try {
 			System.out.println("Solving ConjugateGradientSolver");
-			solver.configurator().debug(BasicLogger.DEBUG).iterations(1);
+			solver.configurator().debug(BasicLogger.DEBUG).iterations(50);
 	        BasicLogger.debug("ConjugateGradientSolver");
 			MatrixStore<Double> e = solver.solve(s, f);
+			
 			System.out.println("Solved ConjugateGradientSolver and obtained: "+e);
 			return plotImage(e);
 		} catch (Exception e) {
@@ -143,7 +141,7 @@ public class WifiEnergyComputation {
 		// Reshaping energy matrix and taking square of amplitude
 		for (int i = 0; i < dimx; i++) {
 			for (int j = 0; j < dimy; j++) {
-				System.out.print(e.get(k)+" ");
+				if(e.get(k) > 0) System.out.print("NZ: "+e.get(k)+" ");
 				energyMatrix[i][j] = e.get(k) * e.get(k);
 				maxVal = Math.max(maxVal, energyMatrix[i][j]);
 				minVal = Math.min(minVal, energyMatrix[i][j]);

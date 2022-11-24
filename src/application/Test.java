@@ -14,7 +14,7 @@ public class Test {
 	public static void main(String[] args) {
 		try {
 			Image image = new Image(new FileInputStream("/Users/hasundaram/Documents/WifiStrengthSimulation/sampleRoom.png"));
-			WifiEnergyComputation energyMatrixComputer = new WifiEnergyComputation(image);
+			WifiSignalComputerApacheCommons energyMatrixComputer = new WifiSignalComputerApacheCommons(image);
 		} catch(Exception e) {
 			System.out.println(e);
 		}

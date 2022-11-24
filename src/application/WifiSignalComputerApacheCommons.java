@@ -4,15 +4,12 @@ import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import org.ojalgo.array.ArrayC128;
-import org.ojalgo.array.ArrayR064;
-import org.ojalgo.array.SparseArray;
-import org.ojalgo.matrix.ComplexMatrix;
-import org.ojalgo.matrix.store.MatrixStore;
-import org.ojalgo.matrix.store.SparseStore;
-import org.ojalgo.matrix.task.iterative.ConjugateGradientSolver;
-import org.ojalgo.netio.BasicLogger;
-import org.apache.commons.math3.complex;
+import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.complex.ComplexField;
+import org.apache.commons.math3.linear.Array2DRowFieldMatrix;
+import org.apache.commons.math3.linear.FieldLUDecomposition;
+import org.apache.commons.math3.linear.*;
+import org.apache.commons.math3.Field;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -29,15 +26,15 @@ public class WifiSignalComputerApacheCommons {
 	double[][] imageMatrix;
 	// Refraction index for concrete 2.55 - 0.01im. The imaginary part conveys the
 	// absorption.
-	ComplexNumber η_concrete = ComplexNumber.of(2.55, 0.01);
+	Complex η_concrete = new Complex(2.55, 0.01);
 	// Refraction index for air 1.0
-	ComplexNumber η_air = ComplexNumber.of(1.0, 0);
+	Complex η_air = new Complex(1.0, 0);
 	// For a 2.5 GHz signal, wavelength is ~ 12cm
 	double λ = 0.12;
 	double k = (2 * π) / λ;
 	double δ = 0.03;
 
-	public WifiEnergyComputation(Image image) {
+	public WifiSignalComputerApacheCommons(Image image) {
 		imageMatrix = buildImageMatrix(image);
 	}
 
@@ -45,24 +42,25 @@ public class WifiSignalComputerApacheCommons {
 		int dimx = (int) imageMatrix.length;
 		int dimy = (int) imageMatrix[0].length;
 
-		ComplexMatrix.DenseReceiver plan = ComplexMatrix.FACTORY.rows(imageMatrix).copy();
-		ComplexNumber airConstant = η_air.invert().multiply(k).power(2);
-		ComplexNumber concreteConstant = η_concrete.invert().multiply(k).power(2);
+		Array2DRowFieldMatrix<Complex> plan = new Array2DRowFieldMatrix<Complex>(ComplexField.getInstance(), dimx, dimy);
+		
+		Complex airConstant = η_air.pow(-1).multiply(k).pow(2);
+		Complex concreteConstant = η_concrete.pow(-1).multiply(k).pow(2);
 
 		for (int i = 0; i < imageMatrix.length; i++) {
 			for (int j = 0; j < imageMatrix[0].length; j++) {
 				if (imageMatrix[i][j] != 0)
-					plan.set(i, j, airConstant);
+					plan.setEntry(i, j, airConstant);
 				else
-					plan.set(i, j, concreteConstant);
+					plan.setEntry(i, j, concreteConstant);
 			}
 		}
+		
+		ArrayRealVector xs = new ArrayRealVector(5 * dimx * dimy);
+		ArrayRealVector ys = new ArrayRealVector(5 * dimx * dimy);
+		SparseFieldVector<Complex> vs = new SparseFieldVector<>(ComplexField.getInstance(), 5 * dimx * dimy);
 
-		SparseArray<Double> xs = SparseArray.factory(ArrayR064.FACTORY).make(5 * dimx * dimy);
-		SparseArray<Double> ys = SparseArray.factory(ArrayR064.FACTORY).make(5 * dimx * dimy);
-		SparseArray<ComplexNumber> vs = SparseArray.factory(ArrayC128.FACTORY).make(5 * dimx * dimy);
-
-		long i = 1;
+		int i = 0;
 		for (int x = 0; x < dimx; x++) {
 			for (int y = 0; y < dimy; y++) {
 				int xm = (x + dimx - 2) % dimx + 1;
@@ -70,73 +68,64 @@ public class WifiSignalComputerApacheCommons {
 				int ym = (y + dimy - 2) % dimy + 1;
 				int yp = y % dimy + 1;
 
-				xs.set(i, calculateLinearIndex(x, y));
-				ys.set(i, calculateLinearIndex(x, y));
-				vs.set(i, plan.get(x, y).subtract(2 * Math.pow(δ, -2)));
+				xs.setEntry(i, calculateLinearIndex(x, y));
+				ys.setEntry(i, calculateLinearIndex(x, y));
+				vs.setEntry(i, plan.getEntry(x, y).subtract(2 * Math.pow(δ, -2)));
 				i += 1;
 
-				xs.set(i, calculateLinearIndex(x, y));
-				ys.set(i, calculateLinearIndex(xp, y));
-				vs.set(i, Math.pow(δ, -2));
+				xs.setEntry(i, calculateLinearIndex(x, y));
+				ys.setEntry(i, calculateLinearIndex(xp, y));
+				vs.setEntry(i, new Complex(Math.pow(δ, -2), 0.0));
 				i += 1;
 
-				xs.set(i, calculateLinearIndex(x, y));
-				ys.set(i, calculateLinearIndex(xm, y));
-				vs.set(i, Math.pow(δ, -2));
+				xs.setEntry(i, calculateLinearIndex(x, y));
+				ys.setEntry(i, calculateLinearIndex(xm, y));
+				vs.setEntry(i, new Complex(Math.pow(δ, -2), 0.0));
 				i += 1;
 
-				xs.set(i, calculateLinearIndex(x, y));
-				ys.set(i, calculateLinearIndex(x, yp));
-				vs.set(i, Math.pow(δ, -2));
+				xs.setEntry(i, calculateLinearIndex(x, y));
+				ys.setEntry(i, calculateLinearIndex(x, yp));
+				vs.setEntry(i, new Complex(Math.pow(δ, -2), 0.0));
 				i += 1;
 
-				xs.set(i, calculateLinearIndex(x, y));
-				ys.set(i, calculateLinearIndex(x, ym));
-				vs.set(i, Math.pow(δ, -2));
+				xs.setEntry(i, calculateLinearIndex(x, y));
+				ys.setEntry(i, calculateLinearIndex(x, ym));
+				vs.setEntry(i, new Complex(Math.pow(δ, -2), 0.0));
 				i += 1;
 			}
 			System.out.println("Processing");
 		}
-		long fsize = dimx * dimy;
+		System.out.println("Processing Done");
+		int fsize = dimx * dimy;
 
-		SparseStore<ComplexNumber> s = SparseStore.COMPLEX.make(fsize, fsize);
-		SparseStore<ComplexNumber> f = SparseStore.COMPLEX.make(fsize, 1);
+		SparseFieldMatrix<Complex> s = new SparseFieldMatrix<>(ComplexField.getInstance(), fsize, fsize);
+		SparseFieldMatrix<Complex> f = new SparseFieldMatrix<>(ComplexField.getInstance(), fsize, 1);
 
-		System.out.println(f.countColumns()+" "+f.countRows());
+
 		// Create sparse matrix
 		for (int x = 0; x < fsize; x++) {
-			s.set(xs.get(x).longValue(), ys.get(x).longValue(), vs.get(x));
-			System.out.println(xs.get(x)+" "+ys.get(x)+" "+vs.get(x));
+			s.setEntry((int)xs.getEntry(x), (int)ys.getEntry(x), vs.getEntry(x));
+			System.out.println(xs.getEntry(x)+" "+ys.getEntry(x)+" "+vs.getEntry(x));
 		}
 
 		// Create router position vector
 		for (int x = routerPosition.getKey(); x < routerPosition.getKey() + 4; x++) {
 			for (int y = routerPosition.getValue(); y < routerPosition.getValue() + 4; y++) {
-				f.set(x * dimx + y, 0, 1.0);
+				f.setEntry(x * dimx + y, 0, new Complex(1.0, 0.0));
 			}
 		}
+		
 		System.out.println(f);
 		System.out.println("Done Major chunk");
 		
-		
-        ConjugateGradientSolver solver = new ConjugateGradientSolver();
-		try {
-			System.out.println("Solving ConjugateGradientSolver");
-			solver.configurator().debug(BasicLogger.DEBUG).iterations(1);
-	        BasicLogger.debug("ConjugateGradientSolver");
-			MatrixStore<Double> e = solver.solve(s, f);
-			System.out.println("Solved ConjugateGradientSolver and obtained: "+e);
-			return plotImage(e);
-		} catch (Exception e) {
-			System.out.println("ConjugateGradientSolver exception: " + e);
-		}
-		return new WritableImage(
-			(int)imageMatrix[0].length,
-			(int)imageMatrix.length
-		);
+		System.out.println("Solving Linear Matrix equation");
+		FieldDecompositionSolver<Complex> solver = new FieldLUDecomposition<Complex>(s).getSolver();
+		SparseFieldMatrix<Complex> e = (SparseFieldMatrix<Complex>) solver.solve(f);
+		System.out.println("Solved Linear Matrix equation");
+		return plotImage(e);
 	}
 
-	private WritableImage plotImage(MatrixStore<Double> e) {
+	private WritableImage plotImage(SparseFieldMatrix<Complex> e) {
 		int dimx = imageMatrix.length;
 		int dimy = imageMatrix[0].length;
 		double[][] energyMatrix = new double[dimx][dimy];
@@ -145,8 +134,8 @@ public class WifiSignalComputerApacheCommons {
 		// Reshaping energy matrix and taking square of amplitude
 		for (int i = 0; i < dimx; i++) {
 			for (int j = 0; j < dimy; j++) {
-				System.out.print(e.get(k)+" ");
-				energyMatrix[i][j] = e.get(k) * e.get(k);
+				System.out.print(e.getEntry(k,0)+" ");
+				energyMatrix[i][j] = e.getEntry(k,0).getReal() * e.getEntry(k,0).getReal();
 				maxVal = Math.max(maxVal, energyMatrix[i][j]);
 				minVal = Math.min(minVal, energyMatrix[i][j]);
 				k++;
@@ -195,7 +184,6 @@ public class WifiSignalComputerApacheCommons {
 
 	private long calculateLinearIndex(int x, int y) {
 		int dimx = imageMatrix.length;
-		int dimy = imageMatrix[0].length;
 		return dimx * x + y;
 	}
 
