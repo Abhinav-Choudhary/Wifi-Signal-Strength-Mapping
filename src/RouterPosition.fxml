@@ -19,6 +19,6 @@
             <Image url="@../floor-plan.png" />
          </image>
       </ImageView>
-      <Button fx:id="continueButton" layoutX="218.0" layoutY="320.0" mnemonicParsing="false" text="Continue" />
+      <Button fx:id="continueButton" layoutX="218.0" layoutY="320.0" mnemonicParsing="false" onAction="#onContinue" text="Continue" />
    </children>
 </AnchorPane>

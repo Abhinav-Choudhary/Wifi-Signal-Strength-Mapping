@@ -5,14 +5,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane minHeight="370.0" minWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="application.LoadingController">
+<AnchorPane minHeight="370.0" minWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoadingController">
    <children>
       <ImageView fx:id="progressImage" fitHeight="261.0" fitWidth="457.0" layoutX="37.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../floor-plan.png" />
          </image>
       </ImageView>
-      <ProgressBar fx:id="progressBar" layoutX="37.0" layoutY="317.0" prefHeight="18.0" prefWidth="419.0" progress="0.5" />
+      <ProgressBar fx:id="progressBar" layoutX="37.0" layoutY="317.0" onMouseClicked="#onLoadComplete" prefHeight="18.0" prefWidth="419.0" progress="0.5" />
    </children>
 </AnchorPane>
