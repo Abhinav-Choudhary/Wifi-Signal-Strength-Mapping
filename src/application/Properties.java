@@ -2,7 +2,7 @@ package application;
 
 public class Properties {
 	private static String imagePath, material;
-	private static double frequency;
+	private static double frequency, routerPosX, routerPosY;
 	
 	public Properties( ) {
 		Properties.imagePath = "";
@@ -32,5 +32,21 @@ public class Properties {
 	
 	public static void setMaterial(String material) {
 		Properties.material = material;
+	}
+
+	public static double getRouterPosX() {
+		return routerPosX;
+	}
+
+	public static void setRouterPosX(double routerPosX) {
+		Properties.routerPosX = routerPosX;
+	}
+
+	public static double getRouterPosY() {
+		return routerPosY;
+	}
+
+	public static void setRouterPosY(double routerPosY) {
+		Properties.routerPosY = routerPosY;
 	}
 }
