@@ -1,19 +1,18 @@
 package application;
 
 import java.io.File;
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-//import java.util.logging.Level;
 
 import javafx.event.ActionEvent;
-//import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
@@ -27,6 +26,7 @@ public class HomeController implements Initializable {
 	Double frequency;
 	String material;
 	@FXML Button submitButton;
+	@FXML Button continueButton;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -37,20 +37,6 @@ public class HomeController implements Initializable {
 		materialSelector.getItems().removeAll(materialSelector.getItems());
 		materialSelector.getItems().addAll("Concrete", "Wood");
 		materialSelector.getSelectionModel().select("Concrete");
-		
-		
-		
-//		FileChooser imageChooser = new FileChooser();
-//		imageUploadButton.setOnAction(
-//				new EventHandler<ActionEvent>() {
-//	                @Override
-//	                public void handle(ActionEvent e) {
-//	                    File file = imageChooser.showOpenDialog(homeRoot.getScene().getWindow());
-//	                    if (file != null) {
-//	                        openFile(file);
-//	                    }
-//	                }
-//	            });
 	}
 	
 	public void uploadFile(ActionEvent event) {
@@ -76,8 +62,18 @@ public class HomeController implements Initializable {
 		try {
 				frequency = frequencySelector.getValue();
 				material = materialSelector.getValue();
-				System.out.println(frequency + " " + material + imgPath);
-			
+				
+				Properties.setImagePath(imgPath);
+				Properties.setFrequency(frequency);
+				Properties.setMaterial(material);
+				
+				System.out.printf("ImagePath: %s%n Frequency: %.2f%n Material: %s", Properties.getImagePath(), Properties.getFrequency(), Properties.getMaterial());
+				
+				Stage newStage = (Stage) submitButton.getScene().getWindow();
+				Parent routerPositionRoot = FXMLLoader.load(getClass().getClassLoader().getResource("RouterPosition.fxml"));
+				Scene newScene = new Scene(routerPositionRoot);
+				newStage.setScene(newScene);
+				newStage.show();
 			
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());

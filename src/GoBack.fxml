@@ -3,10 +3,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane minHeight="184.0" minWidth="500.0" prefHeight="184.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="application.GoBackController">
+<AnchorPane minHeight="184.0" minWidth="500.0" prefHeight="184.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GoBackController">
    <children>
-      <Button fx:id="changeRouterButton" layoutX="55.0" layoutY="79.0" mnemonicParsing="false" text="Change Router Location ?" />
-      <Button fx:id="startOverButton" layoutX="296.0" layoutY="79.0" mnemonicParsing="false" text="Start Over ?" />
+      <Button fx:id="changeRouterButton" layoutX="29.0" layoutY="78.0" mnemonicParsing="false" onAction="#onChangeRouter" text="Change Router Location ?" />
+      <Button fx:id="startOverButton" layoutX="211.0" layoutY="79.0" mnemonicParsing="false" onAction="#onStartOver" prefHeight="26.0" prefWidth="92.0" text="Start Over ?" />
+      <Button fx:id="exitButton" layoutX="340.0" layoutY="78.0" mnemonicParsing="false" onAction="#onExit" prefHeight="26.0" prefWidth="92.0" text="Exit" />
    </children>
 </AnchorPane>
