@@ -12,6 +12,7 @@ public class GoBackController {
 
 	@FXML Button changeRouterButton;
 	@FXML Button startOverButton;
+	@FXML Button exitButton;
 	
 	public void onChangeRouter(ActionEvent event) {
 		try {
@@ -37,6 +38,10 @@ public class GoBackController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+	
+	public void onExit() {
+		System.exit(0);
 	}
 
 }

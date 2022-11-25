@@ -7,12 +7,12 @@
 
 <AnchorPane minHeight="444.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ResultsController">
    <children>
-      <ImageView fx:id="resultImage" fitHeight="253.0" fitWidth="411.0" layoutX="50.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="resultImage" fitHeight="303.0" fitWidth="503.0" layoutX="54.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../floor-plan.png" />
          </image>
       </ImageView>
-      <Button fx:id="saveButton" layoutX="140.0" layoutY="317.0" mnemonicParsing="false" onAction="#onSave" prefHeight="26.0" prefWidth="74.0" text="Save" />
-      <Button fx:id="doneButton" layoutX="309.0" layoutY="317.0" mnemonicParsing="false" onAction="#onDone" prefHeight="26.0" prefWidth="74.0" text="Done" />
+      <Button fx:id="saveButton" layoutX="157.0" layoutY="368.0" mnemonicParsing="false" onAction="#onSave" prefHeight="26.0" prefWidth="74.0" text="Save" />
+      <Button fx:id="doneButton" layoutX="377.0" layoutY="368.0" mnemonicParsing="false" onAction="#onDone" prefHeight="26.0" prefWidth="74.0" text="Done" />
    </children>
 </AnchorPane>
