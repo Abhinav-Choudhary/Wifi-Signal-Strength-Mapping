@@ -79,5 +79,4 @@ public class HomeController implements Initializable {
 			System.out.println(ex.getMessage());
 		}
 	}
-
 }
