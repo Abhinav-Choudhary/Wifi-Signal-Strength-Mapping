@@ -61,5 +61,3 @@ local.properties
 *.out
 *.app
 
-# CDT-specific (C/C++ Development Tooling)
-.cproject

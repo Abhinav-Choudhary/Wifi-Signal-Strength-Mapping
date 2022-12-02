@@ -3,7 +3,7 @@ package application;
 public class EnergyComputationAlgoNative {
 	static {
 		try {
-			System.load("/Users/hasundaram/Documents/WiFiSimulationCSYE/WifiSimulationWorkspace/jni/libEnergyComputationAlgo.dylib");
+			System.load("/Users/hasundaram/Documents/WiFiSimulationCSYE/WiFiSimulationWorkspace/jni/libEnergyComputationAlgo.dylib");
 		} catch(Exception e) {
 			System.out.println(e);
 		}

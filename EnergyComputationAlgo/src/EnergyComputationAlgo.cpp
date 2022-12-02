@@ -113,15 +113,6 @@ typedef Triplet<complex<double> > ComplexTriplet;
 
 		cout<<"Done Major chunk"<<endl;
 
-//		LeastSquaresConjugateGradient<SparseMatrix<complex<double> > > solver;
-//		solver.setMaxIterations(200);
-//		// fill A and b;
-//		// Compute the ordering permutation vector from the structural pattern of A
-//		solver.compute(s);
-//		cout<<"Solving Matrix"<<endl;
-//		//Use the factors to solve the linear system
-//		SparseMatrix<complex<double> > energyMatrix = solver.solve(f);
-
 		s.makeCompressed();
 		SparseLU<SparseMatrix<complex<double> > > solver;
 		solver.analyzePattern(s);   // for this step the numerical values of A are not used
