@@ -1,5 +1,6 @@
 package application;
 
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,10 +20,24 @@ public class LoadingController implements Initializable {
 
 	@FXML ImageView progressImage;
 	@FXML ProgressBar progressBar;
+	static WifiEnergyComputation energyMatrixComputer;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		progressImage.setImage(new Image(Properties.getImagePath()));
+		progressBar.setProgress(0);
+		try {
+			Image image = new Image(new FileInputStream(Properties.getImagePath()));
+			energyMatrixComputer = new WifiEnergyComputation(image);
+//			progressBar.setProgress(50);
+			WritableImage heatMap = energyMatrixComputer.solveForEnergyMatrix();
+//			imageView.setImage(heatMap);
+			Properties.setFinalImage(heatMap);
+//			progressBar.setProgress(100);
+			
+		} catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 	
 	public void onLoadComplete() {

@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 
 public class WifiEnergyComputation {
 	
-	Pair<Integer, Integer> routerPosition = new Pair<>(40,40);
+	Pair<Double, Double> routerPosition = new Pair<>((double)Properties.getRouterPosX(),(double) Properties.getRouterPosY());
 	double[][] imageMatrix;
 
 	public WifiEnergyComputation(Image image) {

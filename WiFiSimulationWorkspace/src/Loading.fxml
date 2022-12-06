@@ -12,6 +12,6 @@
             <Image url="@../floor-plan.png" />
          </image>
       </ImageView>
-      <ProgressBar fx:id="progressBar" layoutX="36.0" layoutY="380.0" onMouseClicked="#onLoadComplete" prefHeight="18.0" prefWidth="527.0" progress="0.5" />
+      <ProgressBar fx:id="progressBar" layoutX="36.0" layoutY="380.0" onMouseClicked="#onLoadComplete" prefHeight="18.0" prefWidth="527.0" />
    </children>
 </AnchorPane>
