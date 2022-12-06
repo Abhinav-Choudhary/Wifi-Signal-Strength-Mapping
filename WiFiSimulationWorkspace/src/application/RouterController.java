@@ -61,9 +61,9 @@ public class RouterController implements Initializable {
 	public void onContinue(ActionEvent event) {
 		try {
 //			Setting router positions
-			Properties.setRouterPosX(posX);
-			Properties.setRouterPosY(posY);
-			System.out.printf("\nRouter Position: %.2f , %.2f", Properties.getRouterPosX(), Properties.getRouterPosY());
+			Properties.setRouterPosX((int) posX);
+			Properties.setRouterPosY((int) posY);
+//			System.out.printf("\nRouter Position: %.2f , %.2f", Properties.getRouterPosX(), Properties.getRouterPosY());
 			
 			Stage newStage = (Stage) continueButton.getScene().getWindow();
 			Parent loadingRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Loading.fxml"));

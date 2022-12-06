@@ -25,10 +25,12 @@ public class LoadingController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		progressImage.setImage(new Image(Properties.getImagePath()));
-		progressBar.setProgress(0);
+//		progressBar.setProgress(0);
 		try {
 			Image image = new Image(new FileInputStream(Properties.getImagePath()));
+			System.out.println(Properties.getRouterPosX() + " " + Properties.getRouterPosY() );
 			energyMatrixComputer = new WifiEnergyComputation(image);
+			System.out.println(energyMatrixComputer.routerPosition.getKey() + " " + energyMatrixComputer.routerPosition.getValue());
 //			progressBar.setProgress(50);
 			WritableImage heatMap = energyMatrixComputer.solveForEnergyMatrix();
 //			imageView.setImage(heatMap);

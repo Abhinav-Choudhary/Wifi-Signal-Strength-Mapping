@@ -10,5 +10,5 @@ public class EnergyComputationAlgoNative {
 		
 	}
 		
-	public native double[][] computeWifiEnergy(double[][] imageMatrix, double routerXPos, double routerYPos);
+	public native double[][] computeWifiEnergy(double[][] imageMatrix, int routerXPos, int routerYPos);
 }
