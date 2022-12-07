@@ -37,6 +37,12 @@ public class LoadingController implements Initializable {
 			Properties.setFinalImage(heatMap);
 //			progressBar.setProgress(100);
 			
+			Stage newStage = (Stage) progressBar.getScene().getWindow();
+			Parent resultsRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Results.fxml"));
+			Scene newScene = new Scene(resultsRoot);
+			newStage.setScene(newScene);
+			newStage.show();
+			
 		} catch(Exception e) {
 			System.out.println(e);
 		}
