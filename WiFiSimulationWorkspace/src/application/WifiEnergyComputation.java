@@ -28,7 +28,9 @@ public class WifiEnergyComputation {
 		int dimx = (int) imageMatrix.length;
 		int dimy = (int) imageMatrix[0].length;
 		EnergyComputationAlgoNative solver = new EnergyComputationAlgoNative();
-		double[][] e = solver.computeWifiEnergy(imageMatrix, routerPosition.getKey(), routerPosition.getValue());
+		int materialType = Properties.getMaterial() == "Concrete" ? 1 : 2;
+		double frequency = Properties.getFrequency();
+		double[][] e = solver.computeWifiEnergy(imageMatrix, routerPosition.getKey(), routerPosition.getValue(), materialType, frequency);
 		System.out.println("Solved Linear Equation and obtained energy matrix");
 		return plotImage(e);
 	}

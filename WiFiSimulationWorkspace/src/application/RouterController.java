@@ -31,7 +31,7 @@ public class RouterController implements Initializable {
 	@FXML Pane floorPlanImageContainer;
 	@FXML ImageView floorPlanImage;
 	double posX, posY;
-	String routerImagePath = "D:\\Northeastern\\CSYE6200\\Source\\wifi-simulator-csye6200\\WiFiSimulationWorkspace\\src\\router.png";
+	String routerImagePath = "router.png";
 
 	@FXML ProgressIndicator routerLoading;
 	
