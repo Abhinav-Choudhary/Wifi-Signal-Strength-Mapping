@@ -23,7 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.ProgressIndicator;
 
-public class RouterController implements Initializable {
+public class RouterController implements Initializable, Callback {
 	
 	static WifiEnergyComputation energyMatrixComputer;
 
@@ -87,9 +87,30 @@ public class RouterController implements Initializable {
 		
 	}
 	
+	public void callback(WritableImage img) {
+//		pauseToGoToNextStage.play();
+		try {
+			Properties.setFinalImage(img);
+			Stage newStage = (Stage) continueButton.getScene().getWindow();
+			Parent loadingRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Results.fxml"));
+			Scene newScene = new Scene(loadingRoot);
+			newStage.setScene(newScene);
+			
+			newStage.show();	
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+	}
+	
 	public void onContinue(ActionEvent event) {
 		continueButton.setDisable(true);
 		routerLoading.setVisible(true);
+		
+		Properties.setRouterPosX((int) posX);
+		Properties.setRouterPosY((int) posY);
+		
+		Thread calcThread = new Thread(new CalculationThread(this));
+		calcThread.start();
 		
 		PauseTransition pauseForCalculation = new PauseTransition(
 		        Duration.seconds(1)
@@ -99,15 +120,20 @@ public class RouterController implements Initializable {
 		);
 		pauseForCalculation.setOnFinished(e -> {
 			try {
-				Properties.setRouterPosX((int) posX);
-				Properties.setRouterPosY((int) posY);
-				Image image = new Image(new FileInputStream(Properties.getImagePath()));
-				System.out.println(Properties.getRouterPosX() + " " + Properties.getRouterPosY() );
-				energyMatrixComputer = new WifiEnergyComputation(image);
-				System.out.println(energyMatrixComputer.routerPosition.getKey() + " " + energyMatrixComputer.routerPosition.getValue());
-				WritableImage heatMap = energyMatrixComputer.solveForEnergyMatrix();
-				Properties.setFinalImage(heatMap);
-				pauseToGoToNextStage.play();
+//				Properties.setRouterPosX((int) posX);
+//				Properties.setRouterPosY((int) posY);
+//				Calculation
+//				Image image = new Image(new FileInputStream(Properties.getImagePath()));
+//				System.out.println(Properties.getRouterPosX() + " " + Properties.getRouterPosY() );
+//				energyMatrixComputer = new WifiEnergyComputation(image);
+//				System.out.println(energyMatrixComputer.routerPosition.getKey() + " " + energyMatrixComputer.routerPosition.getValue());
+//				WritableImage heatMap = energyMatrixComputer.solveForEnergyMatrix();
+//				Properties.setFinalImage(heatMap);
+				
+//				Thread calcThread = new Thread(new CalculationThread(this));
+//				calcThread.start();
+				
+//				pauseToGoToNextStage.play();
 				
 			} catch (Exception ex) {
 				System.out.println(ex);
@@ -127,7 +153,7 @@ public class RouterController implements Initializable {
 			}
 		});
 		
-		pauseForCalculation.play();
+//		pauseForCalculation.play();
 		
 	}
 }

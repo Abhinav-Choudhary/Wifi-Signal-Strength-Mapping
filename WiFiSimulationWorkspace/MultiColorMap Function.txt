@@ -1,0 +1,10 @@
+private ArrayList<Color> buildMultiColorMap() {
+		ArrayList<Color> colorBands = new ArrayList<>();
+		colorBands.addAll(buildColorMap(Color.RED, 50));
+		colorBands.addAll(buildColorMap(Color.YELLOW, 30));
+		colorBands.addAll(buildColorMap(Color.BLUE, 21));
+		
+		Collections.reverse(colorBands);
+		colorBands.set(0, Color.BLACK);
+		return colorBands;
+	}

@@ -53,24 +53,11 @@ public class WifiEnergyComputation {
 		for (int i = 0; i < dimx; i++) {
 			for (int j = 0; j < dimy; j++) {
 				energyMatrix[i][j] = Math.round(100 * (energyMatrix[i][j] - minVal) / (maxVal - minVal));
-				if (imageMatrix[i][j] == 0)
+				if (imageMatrix[i][j] < 200)
 					energyMatrix[i][j] = 0;
 			}
 		}
 		System.out.println("Max Val in the matrix: "+maxVal);
-		
-//		for(int i=routerPosition.getKey(); i<routerPosition.getKey()+5; i++) {
-//			for(int j=routerPosition.getValue(); j<routerPosition.getValue()+5; j++) {
-//				energyMatrix[i][j] = 100;
-//			}
-//		}
-		
-//		for(int i=0; i<energyMatrix.length; i++) {
-//			for(int j=0; j<energyMatrix[0].length; j++) {
-//				System.out.print(energyMatrix[i][j]+" ");
-//			}
-//			System.out.println();
-//		}
 		
 		ArrayList<Color> colorMap = buildColorMap(Color.YELLOW, 101);
 		// Create WritableImage
@@ -126,6 +113,7 @@ public class WifiEnergyComputation {
 			colorBands.add(color);
 		}
 		Collections.reverse(colorBands);
+		colorBands.set(0, Color.BLACK);
 		System.out.println(colorBands);
 		return colorBands;
 	}

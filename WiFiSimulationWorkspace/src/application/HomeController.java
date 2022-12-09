@@ -31,7 +31,7 @@ public class HomeController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		frequencySelector.getItems().removeAll(frequencySelector.getItems());
-		frequencySelector.getItems().addAll(2.4, 5.0);
+		frequencySelector.getItems().addAll(2.4);
 		frequencySelector.getSelectionModel().select(2.4);
 		
 		materialSelector.getItems().removeAll(materialSelector.getItems());
