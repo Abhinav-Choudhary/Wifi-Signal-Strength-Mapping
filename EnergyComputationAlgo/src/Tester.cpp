@@ -14,6 +14,6 @@ int main() {
  	}
 	EnergyComputationAlgo computer(5, 5);
 	cout<<"Computing"<<endl;
-	computer.computeSignalStrengths(imageMatrix, 0, 0);
+	computer.computeSignalStrengths(imageMatrix, 0, 0, 1, 2.4);
     return 0;
 }

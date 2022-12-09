@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ([[DII)[[D
  */
 JNIEXPORT jobjectArray JNICALL Java_application_EnergyComputationAlgoNative_computeWifiEnergy
-  (JNIEnv *, jobject, jobjectArray, jint, jint);
+  (JNIEnv *, jobject, jobjectArray, jint, jint, jint, jdouble);
 
 #ifdef __cplusplus
 }

@@ -3,7 +3,7 @@
 #include "../headers/EnergyComputationAlgo.h"
 
 jobjectArray JNICALL Java_application_EnergyComputationAlgoNative_computeWifiEnergy
-  (JNIEnv *env, jobject thisObject, jobjectArray imageMatrix, jint routerXPos, jint routerYPos) {
+  (JNIEnv *env, jobject thisObject, jobjectArray imageMatrix, jint routerXPos, jint routerYPos, jint materialType, jdouble freq) {
 	int dimx = env -> GetArrayLength(imageMatrix);
 	int dimy = env -> GetArrayLength( (jdoubleArray) env -> GetObjectArrayElement(imageMatrix, 0));
 	vector<vector<double> > imageMatrixNative(dimx);
@@ -13,7 +13,7 @@ jobjectArray JNICALL Java_application_EnergyComputationAlgoNative_computeWifiEne
 		imageMatrixNative[i] = vector<double>(temp, temp+dimy);
 	}
 	EnergyComputationAlgo computer(dimx, dimy);
-	imageMatrixNative = computer.computeSignalStrengths(imageMatrixNative, routerXPos, routerYPos);
+	imageMatrixNative = computer.computeSignalStrengths(imageMatrixNative, routerXPos, routerYPos, materialType, freq);
 
 	jclass doubleClass = env->FindClass("[D");
 	// Create the returnable 2D array

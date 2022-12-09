@@ -11,12 +11,14 @@
 typedef Triplet<complex<double> > ComplexTriplet;
 
 	double π = 3.141592653589793238;
-	double λ = 0.12;
-	double k = (2 * π) / λ;
+	double λ;
+	double k;
 	double δ = 0.03;
 	int dimx, dimy;
 	// Refraction index for concrete 2.55 - 0.01im. The imaginary part conveys the absorption.
-	complex<double> η_concrete = complex<double>(2.55, -0.01);
+	complex<double> η_concrete = complex<double>(2.55, -0.084);
+//	complex<double> η_concrete = complex<double>(1.326, -0.043);
+	complex<double> η_wood = complex<double>(1.27, -0.042);
 	// Refraction index for air 1.0
 	complex<double> η_air = complex<double>(1.0, 0.0);
 
@@ -25,25 +27,38 @@ typedef Triplet<complex<double> > ComplexTriplet;
 		this -> dimy = dimy;
 	}
 
-	vector<vector<double> > EnergyComputationAlgo::computeSignalStrengths(vector<vector<double> > imageMatrix, int routerXpos, int routerYpos) {
+	vector<vector<double> > EnergyComputationAlgo::computeSignalStrengths(vector<vector<double> > imageMatrix, int routerXpos, int routerYpos, int materialType, double freq) {
 		cout<<"Hello from Signal Strength Computer!\n"<<endl;
+
+		λ = 3/(freq*10);
+		k = (2 * π) / λ;
 
 		pair<int, int> routerPos(routerXpos, routerYpos);
 		MatrixXcd plan(dimx,dimy);
 		complex<double> airConstant = pow(k / η_air, 2);
-		complex<double> concreteConstant = pow(k / η_concrete, 2);
+		complex<double> wallMaterialConstant;
+
+		switch(materialType) {
+		case 1: wallMaterialConstant = pow(k / η_concrete, 2);
+		break;
+		case 2: wallMaterialConstant = pow(k / η_wood, 2);
+		break;
+		default: wallMaterialConstant = pow(k / η_concrete, 2);
+		break;
+		}
+
 		for(int i=0; i<dimx; i++) {
 			for(int j=0; j<dimy; j++) {
 				if(isnan(imageMatrix[i][j]) || imageMatrix[i][j] < 0.1) imageMatrix[i][j] = 0.0;
 			}
 		}
 		cout<<"Air Constant: "<<airConstant<<endl;
-		cout<<"Concrete Constant: "<<concreteConstant<<endl;
+		cout<<"Concrete Constant: "<<wallMaterialConstant<<endl;
 
 		for(int i=0; i<dimx; i++) {
 			for(int j=0; j<dimy; j++) {
 				if (imageMatrix[i][j] != 0) plan(i, j) = airConstant;
-				else plan(i, j) = concreteConstant;
+				else plan(i, j) = wallMaterialConstant;
 			}
 		}
 
