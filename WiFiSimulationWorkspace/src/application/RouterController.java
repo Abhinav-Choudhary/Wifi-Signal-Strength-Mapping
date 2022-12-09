@@ -94,6 +94,7 @@ public class RouterController implements Initializable, Callback {
 			Stage newStage = (Stage) continueButton.getScene().getWindow();
 			Parent loadingRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Results.fxml"));
 			Scene newScene = new Scene(loadingRoot);
+            newScene.getStylesheets().add(RouterController.class.getResource("application.css").toExternalForm());
 			newStage.setScene(newScene);
 			
 			newStage.show();	

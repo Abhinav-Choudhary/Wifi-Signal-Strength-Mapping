@@ -20,6 +20,7 @@ public class GoBackController {
 			Stage newStage = (Stage) changeRouterButton.getScene().getWindow();
 			Parent routerPositionRoot = FXMLLoader.load(getClass().getClassLoader().getResource("RouterPosition.fxml"));
 			Scene newScene = new Scene(routerPositionRoot);
+			newScene.getStylesheets().add(GoBackController.class.getResource("application.css").toExternalForm());
 			newStage.setScene(newScene);
 			newStage.show();
 		} catch (Exception e) {

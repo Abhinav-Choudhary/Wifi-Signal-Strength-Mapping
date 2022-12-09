@@ -72,6 +72,7 @@ public class HomeController implements Initializable {
 				Stage newStage = (Stage) submitButton.getScene().getWindow();
 				Parent routerPositionRoot = FXMLLoader.load(getClass().getClassLoader().getResource("RouterPosition.fxml"));
 				Scene newScene = new Scene(routerPositionRoot);
+				newScene.getStylesheets().add(HomeController.class.getResource("application.css").toExternalForm());
 				newStage.setScene(newScene);
 				newStage.show();
 			

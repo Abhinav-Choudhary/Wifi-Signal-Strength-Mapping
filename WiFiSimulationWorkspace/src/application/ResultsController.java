@@ -41,6 +41,7 @@ public class ResultsController implements Initializable {
 			Stage newStage = (Stage) doneButton.getScene().getWindow();
 			Parent goBackRoot = FXMLLoader.load(getClass().getClassLoader().getResource("GoBack.fxml"));
 			Scene newScene = new Scene(goBackRoot);
+			newScene.getStylesheets().add(ResultsController.class.getResource("application.css").toExternalForm());
 			newStage.setScene(newScene);
 			newStage.show();
 		} catch (Exception e) {
