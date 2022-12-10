@@ -1,9 +1,7 @@
 package application;
 
 import javafx.util.*;
-import java.io.*;
 import javafx.scene.image.*;
-import java.nio.ByteBuffer;
 import java.util.*;
 import javafx.scene.paint.Color;
 
@@ -15,18 +13,10 @@ public class WifiEnergyComputation {
 
 	public WifiEnergyComputation(Image image) {
 		System.out.println("WifiEnergy router pos: " + Properties.getRouterPosX() + " " + Properties.getRouterPosY() );
-		double[][] test = {
-				{0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-				{0.0, 2.0, 3.0, 4.0, 5.0, 0.0},
-				{0.0, 2.0, 3.0, 4.0, 5.0, 0.0},
-				{0.0, 2.0, 3.0, 4.0, 5.0, 0.0},
-				{0.0, 0.0, 0.0, 0.0, 0.0, 0.0} };
 		imageMatrix = buildImageMatrix(image);
 	}
 
 	public WritableImage solveForEnergyMatrix() {
-		int dimx = (int) imageMatrix.length;
-		int dimy = (int) imageMatrix[0].length;
 		EnergyComputationAlgoNative solver = new EnergyComputationAlgoNative();
 		int materialType = Properties.getMaterial() == "Concrete" ? 1 : 2;
 		double frequency = Properties.getFrequency();

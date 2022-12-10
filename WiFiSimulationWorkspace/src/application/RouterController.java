@@ -1,10 +1,8 @@
 package application;
 
-import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.ImagePattern;
-//import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -59,10 +55,7 @@ public class RouterController implements Initializable, Callback {
 			posX = Math.round(e.getX());
 			posY = Math.round(e.getY());
 			if(floorPlanImageContainer.getChildren().size() < 2) {
-//				Circle marker = new Circle(posX, posY, 20);
 				Image routerImage = new Image(routerImagePath);
-//				marker.setFill(new ImagePattern(routerImage));
-//		        floorPlanImageContainer.getChildren().add(marker);
 		        double centerX, centerY;
 		        centerX = posX - 15;
 		        centerY = posY - 15;
@@ -72,10 +65,7 @@ public class RouterController implements Initializable, Callback {
 		        
 			} else {
 				floorPlanImageContainer.getChildren().remove(1);
-//				Circle marker = new Circle(posX, posY, 20);
 				Image routerImage = new Image(routerImagePath);
-//				marker.setFill(new ImagePattern(routerImage));
-//		        floorPlanImageContainer.getChildren().add(marker);
 				double centerX, centerY;
 		        centerX = posX - 15;
 		        centerY = posY - 15;
@@ -88,7 +78,6 @@ public class RouterController implements Initializable, Callback {
 	}
 	
 	public void callback(WritableImage img) {
-//		pauseToGoToNextStage.play();
 		try {
 			Properties.setFinalImage(img);
 			Stage newStage = (Stage) continueButton.getScene().getWindow();
@@ -112,49 +101,5 @@ public class RouterController implements Initializable, Callback {
 		
 		Thread calcThread = new Thread(new CalculationThread(this));
 		calcThread.start();
-		
-		PauseTransition pauseForCalculation = new PauseTransition(
-		        Duration.seconds(1)
-		);
-		PauseTransition pauseToGoToNextStage = new PauseTransition(
-		        Duration.seconds(1)
-		);
-		pauseForCalculation.setOnFinished(e -> {
-			try {
-//				Properties.setRouterPosX((int) posX);
-//				Properties.setRouterPosY((int) posY);
-//				Calculation
-//				Image image = new Image(new FileInputStream(Properties.getImagePath()));
-//				System.out.println(Properties.getRouterPosX() + " " + Properties.getRouterPosY() );
-//				energyMatrixComputer = new WifiEnergyComputation(image);
-//				System.out.println(energyMatrixComputer.routerPosition.getKey() + " " + energyMatrixComputer.routerPosition.getValue());
-//				WritableImage heatMap = energyMatrixComputer.solveForEnergyMatrix();
-//				Properties.setFinalImage(heatMap);
-				
-//				Thread calcThread = new Thread(new CalculationThread(this));
-//				calcThread.start();
-				
-//				pauseToGoToNextStage.play();
-				
-			} catch (Exception ex) {
-				System.out.println(ex);
-			}
-		});
-		
-		pauseToGoToNextStage.setOnFinished(e -> {
-			try {
-				Stage newStage = (Stage) continueButton.getScene().getWindow();
-				Parent loadingRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Results.fxml"));
-				Scene newScene = new Scene(loadingRoot);
-				newStage.setScene(newScene);
-				
-				newStage.show();	
-			} catch (Exception ex) {
-				System.out.println(ex);
-			}
-		});
-		
-//		pauseForCalculation.play();
-		
 	}
 }

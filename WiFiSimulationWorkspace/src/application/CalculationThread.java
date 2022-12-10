@@ -27,7 +27,6 @@ public class CalculationThread implements Runnable {
 			energyMatrixComputer = new WifiEnergyComputation(image);
 			System.out.println(energyMatrixComputer.routerPosition.getKey() + " " + energyMatrixComputer.routerPosition.getValue());
 			WritableImage heatMap = energyMatrixComputer.solveForEnergyMatrix();
-//			Properties.setFinalImage(heatMap);
 			Platform.runLater(() -> {
 				this.runCalcLater(heatMap);
 			});
@@ -39,10 +38,4 @@ public class CalculationThread implements Runnable {
 	public void runCalcLater(WritableImage img) {
 		this.c.callback(img);
 	}
-
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//
-//	}
-
 }

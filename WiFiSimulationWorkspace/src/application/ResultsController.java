@@ -29,9 +29,7 @@ public class ResultsController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		resultImage.setImage(new Image(Properties.getImagePath()));
 		resultImage.setImage(Properties.getFinalImage());
-//		exportImage = new Image(Properties.getFinalImage());
 	}
 	
 	public void onDone(ActionEvent event) {
@@ -59,7 +57,6 @@ public class ResultsController implements Initializable {
 			File file = chooser.showSaveDialog(new Stage());
 			ImageIO.write(SwingFXUtils.fromFXImage(resultImage.getImage(), null), "PNG", file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
