@@ -23,9 +23,7 @@ public class CalculationThread implements Runnable {
 	public void run() {
 		try {
 			Image image = new Image(new FileInputStream(Properties.getImagePath()));
-			System.out.println(Properties.getRouterPosX() + " " + Properties.getRouterPosY() );
 			energyMatrixComputer = new WifiEnergyComputation(image);
-			System.out.println(energyMatrixComputer.routerPosition.getKey() + " " + energyMatrixComputer.routerPosition.getValue());
 			WritableImage heatMap = energyMatrixComputer.solveForEnergyMatrix();
 			Platform.runLater(() -> {
 				this.runCalcLater(heatMap);

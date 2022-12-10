@@ -12,7 +12,6 @@ public class WifiEnergyComputation {
 	double[][] imageMatrix;
 
 	public WifiEnergyComputation(Image image) {
-		System.out.println("WifiEnergy router pos: " + Properties.getRouterPosX() + " " + Properties.getRouterPosY() );
 		imageMatrix = buildImageMatrix(image);
 	}
 
@@ -47,7 +46,6 @@ public class WifiEnergyComputation {
 					energyMatrix[i][j] = 0;
 			}
 		}
-		System.out.println("Max Val in the matrix: "+maxVal);
 		
 		ArrayList<Color> colorMap = buildColorMap(Color.YELLOW, 101);
 		// Create WritableImage
@@ -73,7 +71,6 @@ public class WifiEnergyComputation {
 		int dimy = (int) image.getWidth();
 		// Obtain PixelReader
         PixelReader pixelReader = image.getPixelReader();
-        System.out.println(dimx+" "+dimy);
 		double plan[][] = new double[dimx][dimy];
 		for(int i=0; i<dimx; i++) {
 			for(int j=0; j<dimy; j++) {
@@ -104,7 +101,6 @@ public class WifiEnergyComputation {
 		}
 		Collections.reverse(colorBands);
 		colorBands.set(0, Color.BLACK);
-		System.out.println(colorBands);
 		return colorBands;
 	}
 }

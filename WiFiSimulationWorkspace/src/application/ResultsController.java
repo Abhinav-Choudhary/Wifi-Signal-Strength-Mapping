@@ -34,8 +34,6 @@ public class ResultsController implements Initializable {
 	
 	public void onDone(ActionEvent event) {
 		try {
-			System.out.printf("%nResults page --- ImagePath: %s%n Frequency: %.2f%n Material: %s", Properties.getImagePath(), Properties.getFrequency(), Properties.getMaterial());
-			
 			Stage newStage = (Stage) doneButton.getScene().getWindow();
 			Parent goBackRoot = FXMLLoader.load(getClass().getClassLoader().getResource("GoBack.fxml"));
 			Scene newScene = new Scene(goBackRoot);

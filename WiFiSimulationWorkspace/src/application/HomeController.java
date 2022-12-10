@@ -67,8 +67,6 @@ public class HomeController implements Initializable {
 				Properties.setFrequency(frequency);
 				Properties.setMaterial(material);
 				
-				System.out.printf("ImagePath: %s%n Frequency: %.2f%n Material: %s", Properties.getImagePath(), Properties.getFrequency(), Properties.getMaterial());
-				
 				Stage newStage = (Stage) submitButton.getScene().getWindow();
 				Parent routerPositionRoot = FXMLLoader.load(getClass().getClassLoader().getResource("RouterPosition.fxml"));
 				Scene newScene = new Scene(routerPositionRoot);

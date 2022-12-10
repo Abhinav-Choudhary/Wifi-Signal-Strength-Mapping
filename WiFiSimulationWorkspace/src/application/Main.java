@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.image.*;
-import javafx.scene.layout.VBox;
-import java.io.*;
 
 
 public class Main extends Application {
@@ -21,7 +18,7 @@ public class Main extends Application {
 			Scene scene = new Scene(homeRoot);
             scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 			primaryStage.setTitle("Wifi Simulator CSYE6200");
-            primaryStage.getIcons().add(new Image("\\icon.png"));
+            primaryStage.getIcons().add(new Image("icon.png"));
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
