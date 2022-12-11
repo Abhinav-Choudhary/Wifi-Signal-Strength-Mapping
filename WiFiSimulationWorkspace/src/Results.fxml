@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="444.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ResultsController">
+   <children>
+      <ImageView fx:id="resultImage" fitHeight="303.0" fitWidth="503.0" layoutX="54.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../floor-plan.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="saveButton" layoutX="157.0" layoutY="368.0" mnemonicParsing="false" onAction="#onSave" prefHeight="26.0" prefWidth="74.0" text="Save" />
+      <Button fx:id="doneButton" layoutX="377.0" layoutY="368.0" mnemonicParsing="false" onAction="#onDone" prefHeight="26.0" prefWidth="74.0" text="Done" />
+   </children>
+</AnchorPane>
