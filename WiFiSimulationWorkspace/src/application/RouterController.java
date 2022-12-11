@@ -34,46 +34,52 @@ public class RouterController implements Initializable, Callback {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 //		Setting image received from HomePage and adding to ImageViewer
-		Image image = new Image(Properties.getImagePath());
-		floorPlanImage.setImage(image);
-		routerLoading.setVisible(false);
-		
-//		Setting up ImageContainer and ImageViewer Height and Width
-		floorPlanImageContainer.setPrefHeight(image.getHeight());
-		floorPlanImageContainer.setPrefWidth(image.getWidth());
-		floorPlanImage.setFitHeight(image.getHeight());
-		floorPlanImage.setFitWidth(image.getWidth());
-		
-//		To align the ImageViewer to center in X axis
-		floorPlanImageContainer.setTranslateX(100 - image.getWidth()/2);
-		
-//		To calculate the mouse click event with respect to the node size
-		floorPlanImage.setPickOnBounds(true);
-		
-//		Handling mouse click event
-		floorPlanImage.setOnMouseClicked(e -> {
-			posX = Math.round(e.getX());
-			posY = Math.round(e.getY());
-			if(floorPlanImageContainer.getChildren().size() < 2) {
-				Image routerImage = new Image(routerImagePath);
-		        double centerX, centerY;
-		        centerX = posX - 15;
-		        centerY = posY - 15;
-		        Rectangle rect = new Rectangle(centerX, centerY, 30, 30);
-		        rect.setFill(new ImagePattern(routerImage));
-		        floorPlanImageContainer.getChildren().add(rect);
-		        
-			} else {
-				floorPlanImageContainer.getChildren().remove(1);
-				Image routerImage = new Image(routerImagePath);
-				double centerX, centerY;
-		        centerX = posX - 15;
-		        centerY = posY - 15;
-		        Rectangle rect = new Rectangle(centerX, centerY, 30, 30);
-		        rect.setFill(new ImagePattern(routerImage));
-		        floorPlanImageContainer.getChildren().add(rect);
-			}
-		});
+		try {
+			System.out.println(Properties.getImagePath());
+			Image image = new Image("file:"+Properties.getImagePath());
+			
+			floorPlanImage.setImage(image);
+			routerLoading.setVisible(false);
+			
+//			Setting up ImageContainer and ImageViewer Height and Width
+			floorPlanImageContainer.setPrefHeight(image.getHeight());
+			floorPlanImageContainer.setPrefWidth(image.getWidth());
+			floorPlanImage.setFitHeight(image.getHeight());
+			floorPlanImage.setFitWidth(image.getWidth());
+			
+//			To align the ImageViewer to center in X axis
+			floorPlanImageContainer.setTranslateX(100 - image.getWidth()/2);
+			
+//			To calculate the mouse click event with respect to the node size
+			floorPlanImage.setPickOnBounds(true);
+			
+//			Handling mouse click event
+			floorPlanImage.setOnMouseClicked(e -> {
+				posX = Math.round(e.getX());
+				posY = Math.round(e.getY());
+				if(floorPlanImageContainer.getChildren().size() < 2) {
+					Image routerImage = new Image(routerImagePath);
+			        double centerX, centerY;
+			        centerX = posX - 15;
+			        centerY = posY - 15;
+			        Rectangle rect = new Rectangle(centerX, centerY, 30, 30);
+			        rect.setFill(new ImagePattern(routerImage));
+			        floorPlanImageContainer.getChildren().add(rect);
+			        
+				} else {
+					floorPlanImageContainer.getChildren().remove(1);
+					Image routerImage = new Image(routerImagePath);
+					double centerX, centerY;
+			        centerX = posX - 15;
+			        centerY = posY - 15;
+			        Rectangle rect = new Rectangle(centerX, centerY, 30, 30);
+			        rect.setFill(new ImagePattern(routerImage));
+			        floorPlanImageContainer.getChildren().add(rect);
+				}
+			});
+		} catch(Exception ex) {
+			System.out.println(ex);
+		}
 		
 	}
 	

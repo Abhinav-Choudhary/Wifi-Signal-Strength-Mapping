@@ -17,7 +17,7 @@ typedef Triplet<complex<double> > ComplexTriplet;
 	int dimx, dimy;
 	// Refraction index for concrete 2.55 - 0.01im. The imaginary part conveys the absorption.
 	complex<double> η_concrete = complex<double>(2.55, -0.01);
-//	complex<double> η_concrete = complex<double>(1.326, -0.043);
+	// Refraction index for wood 1.27 - 0.042im.
 	complex<double> η_wood = complex<double>(1.27, -0.042);
 	// Refraction index for air 1.0
 	complex<double> η_air = complex<double>(1.0, 0.0);

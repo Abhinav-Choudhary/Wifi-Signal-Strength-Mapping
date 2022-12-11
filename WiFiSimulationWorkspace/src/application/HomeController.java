@@ -70,6 +70,7 @@ public class HomeController implements Initializable {
 				System.out.printf("ImagePath: %s%n Frequency: %.2f%n Material: %s", Properties.getImagePath(), Properties.getFrequency(), Properties.getMaterial());
 				
 				Stage newStage = (Stage) submitButton.getScene().getWindow();
+				System.out.println(getClass().getClassLoader().getResource("RouterPosition.fxml"));
 				Parent routerPositionRoot = FXMLLoader.load(getClass().getClassLoader().getResource("RouterPosition.fxml"));
 				Scene newScene = new Scene(routerPositionRoot);
 				newScene.getStylesheets().add(HomeController.class.getResource("application.css").toExternalForm());

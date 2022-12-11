@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
-//#include <Eigen/Sparse>
-#include <SparseCore>
-//#include <Eigen/Dense>
-#include <SparseLU>
+#include <Eigen/SparseCore>
+#include <Eigen/SparseLU>
 
 using namespace std;
 using namespace Eigen;

@@ -3,7 +3,8 @@ package application;
 public class EnergyComputationAlgoNative {
 	static {
 		try {
-			System.loadLibrary("libEnergyComputationAlgo");
+			String workspacePath = System.getProperty("user.dir");
+			System.load(workspacePath+"/jni/libEnergyComputationAlgo.dylib");
 		} catch(Exception e) {
 			System.out.println(e);
 		}
