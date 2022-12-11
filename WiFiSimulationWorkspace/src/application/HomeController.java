@@ -31,7 +31,7 @@ public class HomeController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		frequencySelector.getItems().removeAll(frequencySelector.getItems());
-		frequencySelector.getItems().addAll(2.4, 5.0);
+		frequencySelector.getItems().addAll(2.4);
 		frequencySelector.getSelectionModel().select(2.4);
 		
 		materialSelector.getItems().removeAll(materialSelector.getItems());
@@ -70,8 +70,10 @@ public class HomeController implements Initializable {
 				System.out.printf("ImagePath: %s%n Frequency: %.2f%n Material: %s", Properties.getImagePath(), Properties.getFrequency(), Properties.getMaterial());
 				
 				Stage newStage = (Stage) submitButton.getScene().getWindow();
+				System.out.println(getClass().getClassLoader().getResource("RouterPosition.fxml"));
 				Parent routerPositionRoot = FXMLLoader.load(getClass().getClassLoader().getResource("RouterPosition.fxml"));
 				Scene newScene = new Scene(routerPositionRoot);
+				newScene.getStylesheets().add(HomeController.class.getResource("application.css").toExternalForm());
 				newStage.setScene(newScene);
 				newStage.show();
 			
@@ -79,5 +81,4 @@ public class HomeController implements Initializable {
 			System.out.println(ex.getMessage());
 		}
 	}
-
 }

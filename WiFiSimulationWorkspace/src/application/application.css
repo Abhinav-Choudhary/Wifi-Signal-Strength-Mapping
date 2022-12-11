@@ -1,0 +1,34 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root {
+    -fx-font-family: 'Georgia';
+    -fx-background-image: url("/bgImage.jpg");
+    -fx-background-size: cover;
+}
+
+
+.label {
+	-fx-text-fill: black;
+}
+
+.button {
+    -fx-border: none;
+    -fx-background-color: #03a9f4;
+    -fx-text-fill: #ffffff;
+}
+
+.choice-box {
+    -fx-border: 2px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-background-color: white;
+}
+
+.choice-box .context-menu { 
+	-fx-background-color: white;
+}
+
+.choice-box .menu-item:focused { -fx-background-color: #bdeafe; }
+
+.choice-box .menu-item > .label { -fx-text-fill: black; }
+
+.choice-box .menu-item:focused > .label { -fx-text-fill: black; }
