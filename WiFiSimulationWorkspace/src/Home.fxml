@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="444.0" minWidth="600.0" prefHeight="370.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+   <children>
+      <Label layoutX="161.0" layoutY="32.0" prefHeight="31.0" prefWidth="278.0" text="Radiation Wifi Simulator">
+         <font>
+            <Font name="Calibri Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="123.0" prefHeight="18.0" prefWidth="42.0" text="File:" />
+      <Label fx:id="imagePathLabel" layoutX="93.0" layoutY="123.0" prefHeight="18.0" prefWidth="325.0" text="Choose PNG Image..." />
+      <Button fx:id="imageUploadButton" layoutX="439.0" layoutY="119.0" mnemonicParsing="false" onAction="#uploadFile" text="Choose Image">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="23.0" layoutY="177.0" text="Frequency:" />
+      <ChoiceBox fx:id="frequencySelector" layoutX="97.0" layoutY="173.0" prefHeight="26.0" prefWidth="433.0" />
+      <Label layoutX="23.0" layoutY="250.0" text="Material:" />
+      <ChoiceBox fx:id="materialSelector" layoutX="97.0" layoutY="246.0" prefHeight="26.0" prefWidth="433.0" />
+      <Button fx:id="submitButton" disable="true" layoutX="273.0" layoutY="328.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
+   </children>
+</AnchorPane>
