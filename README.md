@@ -3,6 +3,11 @@
 ### Description
 Wi-Fi signal strength mapping application is a project that aims to provide the most ideal spot to place the Wi-Fi router, ensuring the entirety of the house receives an adequate reception. The system enables users to enter their floor plan as a PNG image, modify certain parameters like frequency and material of the walls and then pick a spot to place the router, the system then takes those inputs and generates a heatmap image which displays the flow and reach of the signals. 
 
+### Project Structure
+Two separate branches have been created to maintain code for MAC and Windows operating Systems listed as the following 
+- [main-mac-systems](https://github.com/NEU-MS-Projects/wifi-simulator-csye6200/tree/main-mac-systems)
+- [main-windows-systems](https://github.com/NEU-MS-Projects/wifi-simulator-csye6200/tree/main-windows-systems)
+
 ### Implementation
 **A. C++ Compiler and Eclipse IDE Setup**
 A C++ compiler such as MinGW is required to be installed in Windows operating systems. This compiler needs to be made available throughout the system by adding it to System Environment. MAC has GCC toolchains installed by default. Eclipse C/C++ IDE CDT needs to be installed to support development of C++ project.
