@@ -5,8 +5,8 @@ Wi-Fi signal strength mapping application is a project that aims to provide the 
 
 ### Project Structure
 Two separate branches have been created to maintain code for MAC and Windows operating Systems listed as the following 
-- [main-mac-systems](https://github.com/NEU-MS-Projects/wifi-simulator-csye6200/tree/main-mac-systems)
-- [main-windows-systems](https://github.com/NEU-MS-Projects/wifi-simulator-csye6200/tree/main-windows-systems)
+- [main-mac-systems](https://github.com/Abhinav-Choudhary/Wifi-Signal-Strength-Mapping/tree/main-mac-systems)
+- [main-windows-systems](https://github.com/Abhinav-Choudhary/Wifi-Signal-Strength-Mapping)
 
 ### Implementation
 **A. C++ Compiler and Eclipse IDE Setup**
